@@ -1,14 +1,18 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 
-export default function About() {
-  const imageLink =
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Ffood&psig=AOvVaw08_6zJblRlpnP1LiEkUyIk&ust=1646324099639000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCEj6vpp_YCFQAAAAAdAAAAABAD";
-  const name = "Restatuarnat Name Is the Blan Blah Blah";
-  const description = "Thai + Comfort Font $$ 4 ⭐️";
+export default function About(props) {
+  const { name, image, price, reviews, rating, categories } =
+    props.route.params;
+
+  const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+
+  const description = `${formattedCategories} ${
+    price ? " • " + price : ""
+  } • 🎫 • ${rating} ⭐ (${reviews}+)`;
   return (
     <View style={{ paddingBottom: 10 }}>
-      <RestuarantImage image={imageLink} />
+      <RestuarantImage image={image} />
       <RestuarantName name={name} />
       <RestuarantDescription description={description} />
     </View>
@@ -18,7 +22,7 @@ export default function About() {
 const RestuarantImage = (prop) => {
   return (
     <Image
-      source={require("../../assets/images/bg1.jpg")}
+      source={{ uri: prop.image }}
       style={{ width: "100%", height: 180 }}
     />
   );

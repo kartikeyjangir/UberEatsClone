@@ -1,12 +1,12 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
-export default function RestaurantItem({ restaurantData }) {
+export default function RestaurantItem({ navigation, restaurantData }) {
   return (
     <View style={{ marginTop: 15 }}>
-      {restaurantData.map((resturant, index) => {
+      {restaurantData.map((restaurant, index) => {
         return (
-          <View
+          <TouchableOpacity
             key={index}
             style={{
               padding: 15,
@@ -15,11 +15,21 @@ export default function RestaurantItem({ restaurantData }) {
               marginBottom: 15,
               marginHorizontal: 10,
             }}
+            onPress={() =>
+              navigation.navigate("RestaurantDetails", {
+                name: restaurant.name,
+                image: restaurant.image_url,
+                price: restaurant.price,
+                reviews: restaurant.review_count,
+                rating: restaurant.rating,
+                categories: restaurant.categories,
+              })
+            }
           >
             <Image
               style={{ width: "100%", height: 180 }}
               source={{
-                uri: resturant.image_url,
+                uri: restaurant.image_url,
               }}
             />
 
@@ -50,7 +60,7 @@ export default function RestaurantItem({ restaurantData }) {
                     width: 250,
                   }}
                 >
-                  {resturant.name}
+                  {restaurant.name}
                 </Text>
                 <Text style={{ fontSize: 13, color: "gray" }}>35-40 min</Text>
               </View>
@@ -62,10 +72,10 @@ export default function RestaurantItem({ restaurantData }) {
                   borderRadius: 100,
                 }}
               >
-                <Text>{resturant.rating}</Text>
+                <Text>{restaurant.rating}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         );
       })}
     </View>

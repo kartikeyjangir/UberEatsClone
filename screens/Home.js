@@ -9,7 +9,7 @@ import BottomNav from "../components/Home/BottomNav";
 
 const YELP_API_KEY =
   "_nx2-qoOyXFD36PSPkTJ-LEYE9YTtDiG9dHO2aDAbV4YyjIctmCBiWEcfVXMus1apE-CMMR1yV4jeTF2h9NJMaf7t_bbKC0fi5nsCpOWSSbRHRs6EJqAFskYH28fYnYx";
-export default function Home() {
+export default function Home({ navigation }) {
   const [restaurantData, setRestaurantData] = useState([]);
   const [city, setCity] = useState("San Francisco");
   const [activeTab, setActiveTab] = useState("Delivery");
@@ -43,7 +43,10 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantItems restaurantData={restaurantData} />
+        <RestaurantItems
+          restaurantData={restaurantData}
+          navigation={navigation}
+        />
       </ScrollView>
       <BottomNav />
     </SafeAreaView>

@@ -4,7 +4,7 @@ import About from "../components/RestaurantDetail/About";
 import MenuItems from "../components/RestaurantDetail/MenuItems";
 import { Divider } from "react-native-elements";
 
-export default function RestaurantDetials() {
+export default function RestaurantDetials({ route }) {
   const foods = [
     {
       title: "Lasagna",
@@ -83,7 +83,7 @@ export default function RestaurantDetials() {
   ];
   return (
     <View>
-      <About />
+      <About route={route} />
       <Divider width={1.8} style={{ marginVertical: 20 }} />
       <MenuItems restaurantName="doem" foods={foods} />
     </View>
